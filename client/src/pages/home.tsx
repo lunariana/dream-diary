@@ -1,9 +1,10 @@
+import React from 'react';
 import { Outlet, Link } from "react-router-dom";
 
 const Home = () => {
   return (
     <>
-      <div classname={ "home" }>
+      <div className={ "home" }>
         <nav>
           <ul>
             <li>
@@ -20,6 +21,7 @@ const Home = () => {
         <p>add button for new dream entry</p>
         <p>add navigation bar?</p>
         <p>add button to view old entries</p>
+        <p>how do i integrate login/signup system??</p>
       </div>
       <Outlet />
     </>

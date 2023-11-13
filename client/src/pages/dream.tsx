@@ -1,0 +1,1 @@
+// page showing an individual dream
