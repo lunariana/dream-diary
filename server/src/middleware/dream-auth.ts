@@ -2,17 +2,20 @@ import { Request, Response, NextFunction } from 'express';
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
-const userDreamMiddleware = async (req: Request, res: Response, next:NextFunction) => {
+const dreamAuthMiddleware = async (req: Request, res: Response, next:NextFunction) => {
+
+    // user authentication should already have been done
+    // check that user is authorized to view this dream
 
     const dreamID = Number(req.params.dreamID);
-    const username = req.body.username;
+    const username = req.session.username;
 
     const dream = await prisma.dreams.findUnique({
         where: {
             dreamID: dreamID,
         },
     });
-    console.log("user dream match middleware:", dream);
+    console.log("dream auth middleware:", dream);
 
     // check that dream exists
     if (dream === null) {
@@ -28,4 +31,4 @@ const userDreamMiddleware = async (req: Request, res: Response, next:NextFunctio
 }
 
 
-export default userDreamMiddleware;
+export default dreamAuthMiddleware;
