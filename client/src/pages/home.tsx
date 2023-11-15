@@ -1,20 +1,12 @@
 import React from 'react';
-import { Outlet, Link } from "react-router-dom";
+// import { Outlet } from "react-router-dom";
+import Header from '../components/header';
 
-const Home = () => {
+const HomePage = () => {
   return (
     <>
-      <div className={ "home" }>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-          </ul>
-        </nav>
+      <div className="home">
+        <Header/>
         <h1>hello</h1>
         <p>world</p>
         <p>add short intro text body</p>
@@ -23,9 +15,9 @@ const Home = () => {
         <p>add button to view old entries</p>
         <p>how do i integrate login/signup system??</p>
       </div>
-      <Outlet />
+      {/* <Outlet /> */}
     </>
   );
 };
 
-export default Home;
+export default HomePage;
