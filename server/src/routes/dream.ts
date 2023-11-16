@@ -14,6 +14,8 @@ router.use(userAuthMiddleware);
 
 router.post('/newDream', async (req: Request, res: Response) => {
 
+    // create new dream for user using given info
+
     // (outdated) test in git bash terminal:
     // curl.exe -X POST http://localhost:8000/dream/newDream -H "Content-Type: application/json" -d '{"dreamID": 2, "title": "title2", "content": "conntennttt", "username": "lunaria"}'
 
@@ -48,7 +50,30 @@ router.post('/newDream', async (req: Request, res: Response) => {
     return res.status(200).json(createdDream);
 });
 
+router.post('/getDreams', async (req: Request, res: Response) => {
+
+    // return list of user's dreams
+    
+    console.log("get dreams");
+    const username = req.session.username;
+
+    const dreamsResult = await prisma.dreams.findMany({
+        where: {
+            username: username,
+        },
+        orderBy: [
+            { dateCreated: 'desc' },
+            { dreamID: 'desc' },
+        ],
+    });
+    console.log(dreamsResult);
+
+    return res.status(200).json(dreamsResult);
+});
+
 router.post('/:dreamID/getDream', dreamAuthMiddleware, async (req: Request, res: Response) => {
+
+    // get dream with given dream id
 
     // (outdated) test in git bash terminal:
     // curl.exe -X POST http://localhost:8000/dream/1/getDream -H "Content-Type: application/json" -d '{"username": "lunaria"}'
@@ -57,11 +82,6 @@ router.post('/:dreamID/getDream', dreamAuthMiddleware, async (req: Request, res:
     const dreamID = Number(req.params.dreamID);
 
     const dreamResult = await prisma.dreams.findUnique({
-        select: {
-            title: true,
-            content: true,
-            dateCreated: true,
-        },
         where: {
             dreamID: dreamID,
         },
@@ -73,7 +93,9 @@ router.post('/:dreamID/getDream', dreamAuthMiddleware, async (req: Request, res:
 
 router.post('/:dreamID/editDream', dreamAuthMiddleware, async (req: Request, res: Response) => {
     
-    // test in git bash terminal:
+    // update dream with given dream id using given info
+
+    // (outdated) test in git bash terminal:
     // curl.exe -X POST http://localhost:8000/dream/1/editDream -H "Content-Type: application/json" -d '{"title": "newtitle", "content": "blablablablah", "username": "lunaria"}'
 
     console.log("edit dream:", req.body);
@@ -100,7 +122,9 @@ router.post('/:dreamID/editDream', dreamAuthMiddleware, async (req: Request, res
 
 router.post('/:dreamID/deleteDream', dreamAuthMiddleware, async (req: Request, res: Response) => {
 
-    // test in git bash terminal:
+    // delete dream with given dream id
+
+    // (outdated) test in git bash terminal:
     // curl.exe -X POST http://localhost:8000/dream/3/deleteDream -H "Content-Type: application/json" -d '{"username": "lunaria"}'
 
     console.log("delete dream:", req.body);    // req.body probably doesn't contain anything rn
@@ -114,6 +138,28 @@ router.post('/:dreamID/deleteDream', dreamAuthMiddleware, async (req: Request, r
     console.log(deletedDream);
 
     return res.status(200).json(deletedDream);
+});
+
+router.get('/nextDreamID', async (req: Request, res: Response) => {
+    
+    // return id of next dream to be inserted into database
+
+    console.log("next dream id");
+
+    const nextDreamID = await prisma.dreams.findFirst({
+        orderBy: {
+            dreamID: 'desc',
+        },
+    });
+    console.log(nextDreamID);
+
+    if (!nextDreamID) {
+        // if dream database is empty, start from id 1
+        return res.status(200).send('1');
+    } else {
+        // return 1 + largest dream id in database
+        return res.status(200).send((nextDreamID.dreamID + 1).toString());
+    }
 });
 
 

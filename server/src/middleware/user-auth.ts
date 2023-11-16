@@ -4,6 +4,8 @@ const prisma = new PrismaClient();
 
 const userAuthMiddleware = async (req: Request, res: Response, next: NextFunction) => {
 
+    console.log(req.session.username);
+    
     // check that user is logged in
     if (req.session.username) {
         console.log("user authentication successful");

@@ -51,10 +51,11 @@ router.post('/signup', async (req: Request, res: Response) => {
             return res.status(500).json({ error: err });
         }
         // store user information in session
-        req.session.username = req.body.username
+        req.session.username = username;
+        console.log(req.session.username);
+
+        return res.status(200).json(createdUser);    // this needs to be inside the callback function b/c req.session.regenerate is asynchronous
     });
-    
-    return res.status(200).json(createdUser);
 });
 
 router.post('/login', async (req: Request, res: Response) => {
@@ -84,15 +85,6 @@ router.post('/login', async (req: Request, res: Response) => {
         return res.status(500).json({ error: "Wrong password" });
     }
 
-    // regenerate the session, which is good practice to help guard against forms of session fixation
-    req.session.regenerate((err) => {
-        if (err) {
-            return res.status(500).json({ error: err });
-        }
-        // store user information in session
-        req.session.username = username;
-    });
-
     const userInfo = await prisma.users.findUnique({
         select: {
             username: true,
@@ -104,7 +96,17 @@ router.post('/login', async (req: Request, res: Response) => {
         },
     });
 
-    return res.status(200).json(userInfo);
+    // regenerate the session, which is good practice to help guard against forms of session fixation
+    req.session.regenerate((err) => {
+        if (err) {
+            return res.status(500).json({ error: err });
+        }
+        // store user information in session
+        req.session.username = username;
+        console.log(req.session.username);
+
+        return res.status(200).json(userInfo);    // this needs to be inside the callback function b/c req.session.regenerate is asynchronous
+    });
 });
 
 router.post('/logout', async (req: Request, res: Response) => {
@@ -123,10 +125,20 @@ router.post('/logout', async (req: Request, res: Response) => {
             if (err) {
                 return res.status(500).json({ error: err });
             }
-        })
-    });
 
-    return res.status(200).json({ message: "Successfully logged out" });
+            return res.status(200).json({ message: "Successfully logged out" });    // this needs to be inside the callback function b/c req.session.regenerate is asynchronous
+        });
+    });
+});
+
+router.post('/getAuthStatus', async (req: Request, res: Response) => {
+    
+    // check whether user is logged in or not
+    if (req.session.username) {
+        res.status(200).send(true);
+    } else {
+        res.status(200).send(false);
+    }
 });
 
 router.post('/getName', async (req: Request, res: Response) => {

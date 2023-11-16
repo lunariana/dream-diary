@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/header';
 import axios from 'axios';
-import { SAPIBase } from '../tools/api';
+// import { SAPIBase } from '../tools/api';
 
 const SignupPage = () => {
 
@@ -11,16 +11,9 @@ const SignupPage = () => {
   const [firstName, setFirstName] = React.useState<string>("");
   const [lastName, setLastName] = React.useState<string>("");
   const [errorText, setErrorText] = React.useState<string>("");
-  const [signupSuccess, setSignupSuccess] = React.useState<Boolean>(false);
+  const [signupSuccess, setSignupSuccess] = React.useState<boolean>(false);
 
   const navigate = useNavigate();
-
-  React.useEffect(() => {
-    if (signupSuccess) {
-      // redirect user to home page
-      navigate("/");
-    }
-  }, [signupSuccess]);
 
   const onUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value)
@@ -60,12 +53,12 @@ const SignupPage = () => {
         lastName: string;
       };
 
-      const { data } = await axios.post<UserInfo>(SAPIBase + '/user/signup', {username: username, password: password, firstName: firstName, lastName: lastName});
+      const { data } = await axios.post<UserInfo>('/user/signup', { username: username, password: password, firstName: firstName, lastName: lastName });
       console.log(data);
 
       setErrorText("");
       setSignupSuccess(true);
-    }
+    };
     
     // if an error occurs, show error message
     signupAPIRequest().catch((error) => {
@@ -80,6 +73,13 @@ const SignupPage = () => {
     });
   };
 
+  React.useEffect(() => {
+    if (signupSuccess) {
+      // redirect user to home page
+      navigate("/");
+    }
+  }, [signupSuccess]);
+
   return (
     <div className='signup'>
       <Header/>
@@ -87,24 +87,49 @@ const SignupPage = () => {
       <div className='form'>
         <form onSubmit={handleSignupSubmit}>
           <label htmlFor='username'>Username </label>
-          <input type='text' id='username' value={username} required placeholder='Enter username' onChange={onUsernameChange}/>
+          <input 
+            type='text' 
+            id='username' 
+            value={username} 
+            required 
+            placeholder='Enter username' 
+            onChange={onUsernameChange}
+          />
           <br/>
-
           <label htmlFor='password'>Password </label>
-          <input type='password' id='password' value={password} required placeholder='Enter password' onChange={onPasswordChange}/>
+          <input 
+            type='password' 
+            id='password' 
+            value={password} 
+            required 
+            placeholder='Enter password' 
+            onChange={onPasswordChange}
+          />
           <br/>
-
           <label htmlFor='firstname'>First Name </label>
-          <input type='text' id='firstname' value={firstName} required placeholder='Enter your first name' onChange={onFirstNameChange}/>
+          <input 
+            type='text' 
+            id='firstname' 
+            value={firstName} 
+            required 
+            placeholder='Enter your first name' 
+            onChange={onFirstNameChange}
+          />
           <br/>
-
           <label htmlFor='lastname'>Last Name </label>
-          <input type='text' id='lastname' value={lastName} placeholder='Enter your last name' onChange={onLastNameChange}/>
+          <input 
+            type='text' 
+            id='lastname' 
+            value={lastName} 
+            placeholder='Enter your last name' 
+            onChange={onLastNameChange}
+          />
           <br/>
-          
           <input type='submit' value='Sign Up'/>
         </form>
       </div>
+      <p>or</p>
+      <button onClick={() => { navigate('/login') }}>Log In</button>
       <span>{errorText}</span>
     </div>
   );

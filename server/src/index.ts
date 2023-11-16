@@ -16,7 +16,8 @@ const port = process.env.PORT || 8000;
 // only allow clients in whitelist to access server
 const whitelist = ['http://localhost:3000'];
 const options: cors.CorsOptions = {
-    origin: whitelist
+    origin: whitelist,
+    credentials: true,            // must be enabled to allow axios to send cookies in requests
 };
 app.use(cors(options));
 
