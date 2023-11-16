@@ -41,27 +41,27 @@ const LoginPage = () => {
     // console.log(username);
     // console.log(password);
 
-    const asyncFun = async() => {
+    const loginAPIRequest = async() => {
 
-      // basically defines the types of data that an IAPIResponse object has; not necessary but ig it helps with type clarity
-      interface IAPIResponse {
+      // basically defines the types of data that a UserInfo object has; not necessary but ig it helps with type clarity
+      interface UserInfo {
         username: string;
         firstName: string;
-        lastName: string
+        lastName: string;
       };
 
-      const { data } = await axios.post<IAPIResponse>(SAPIBase + '/user/login', {username: username, password: password});
+      const { data } = await axios.post<UserInfo>(SAPIBase + '/user/login', {username: username, password: password});
       console.log(data);
 
+      setErrorText("");
       setLoginSuccess(true);
     }
     
     // if an error occurs, show error message
-    asyncFun().catch((error) => {
+    loginAPIRequest().catch((error) => {
       // if the server sends error information
       if (error.response) {
         console.log(error.response.data);
-        console.log(error.response.data.error);
         setErrorText(error.response.data.error);
 
       } else {
@@ -87,7 +87,7 @@ const LoginPage = () => {
           <input type='submit' value='Login'/>
         </form>
       </div>
-      <p>{errorText}</p>
+      <span>{errorText}</span>
     </div>
   );
 };

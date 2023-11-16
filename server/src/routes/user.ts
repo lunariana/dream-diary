@@ -44,6 +44,7 @@ router.post('/signup', async (req: Request, res: Response) => {
     });
     console.log(createdUser);
 
+    // signup automatically logs user in
     // regenerate the session, which is good practice to help guard against forms of session fixation
     req.session.regenerate(function (err) {
         if (err) {
