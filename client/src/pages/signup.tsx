@@ -76,7 +76,7 @@ const SignupPage = () => {
   React.useEffect(() => {
     if (signupSuccess) {
       // redirect user to home page
-      navigate("/");
+      navigate("/home");
     }
   }, [signupSuccess]);
 

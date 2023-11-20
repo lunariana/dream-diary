@@ -53,7 +53,7 @@ const Header = () => {
       // set auth status to false
       setAuthStatus(false);
 
-      // navigate to home page
+      // navigate to default page
       navigate('/');
     };
 
@@ -76,7 +76,7 @@ const Header = () => {
         <button onClick={onBackClick}>back </button> {/* just to remember that this is possible */}
         <Link to="/">Home </Link>
         <Link to="/about">About </Link>
-        {/* ///////////////////////////////////////////////// temporary links */}
+        {/* ///////////////////////////////////////////////// temporary links? */}
         <Link to='/dream-archive'>Dream Archive </Link>
         <Link to='/new-dream'>New Dream </Link>
         {authStatus ? (

@@ -3,10 +3,9 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Header from '../components/header';
 
-// landing page for authenticated users
-const HomePage = () => {
+// landing page for unauthenticated users
+const DefaultPage = () => {
 
-  // const [authStatus, setAuthStatus] = React.useState<boolean>(false);
   const [errorText, setErrorText] = React.useState<string>("");
 
   const navigate = useNavigate();
@@ -20,9 +19,9 @@ const HomePage = () => {
       const { data } = await axios.post<boolean>('/user/getAuthStatus');
       console.log(data, typeof(data));
 
-      // if user is not logged in, navigate to default page
-      if (!data) {
-        navigate("/", { replace: true });
+      // if user is authenticated, navigate to home page
+      if (data) {
+        navigate('/home', { replace: true });
       }
     };
 
@@ -32,7 +31,6 @@ const HomePage = () => {
       if (error.response) {
         console.log(error.response.data);
         setErrorText(error.response.data.error);
-
       } else {
         setErrorText("Something went wrong...");
       }
@@ -41,18 +39,18 @@ const HomePage = () => {
 
   return (
     <>
-      <div className="home">
+      <div className="default">
         <Header/>
         <h1>Dream Diary</h1>
-        <p>hello [name]!</p>  {/* ////////////////////////// todo: get user's name in here */}
-        <p>welcome to your dream diary!</p>
-        <button onClick={() => { navigate('/new-dream') }}>Record a New Dream</button>
-        <br/>
-        <button onClick={() => { navigate('/dream-archive') }}>View Past Dreams</button>
+        <p>hello!</p>
+        <p>please log in or sign up to access your dream diary</p>
+        <button onClick={() => { navigate('/login') }}>Log In</button>
+        <p>or</p>
+        <button onClick={() => { navigate('/signup') }}>Sign Up</button>
         <p>sweet dreams!</p>
         <br/>
         <br/>
-        <p>say hello name (and/or say name's dream diary)</p>
+        <br/>
         <p>add short intro text body</p>
         <p>if time permits, create an user/account settings page</p>
         <p>also: change favicon and page name thingy</p>
@@ -61,4 +59,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default DefaultPage;

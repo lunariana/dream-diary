@@ -66,7 +66,7 @@ const LoginPage = () => {
   React.useEffect(() => {
     if (loginSuccess) {
       // redirect user to home page
-      navigate("/");
+      navigate("/home");
     }
   }, [loginSuccess]);
 
