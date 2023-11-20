@@ -3,10 +3,12 @@ import Header from '../components/header';
 
 const PageNotFound = () => {
   return (
-    <div className="page-not-found">
+    <>
       <Header/>
-      Page Not Found 😭
-    </div>
+      <div className="page-not-found">
+        Page Not Found 😭
+      </div>
+    </>
   );
 };
 

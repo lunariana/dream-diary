@@ -81,57 +81,62 @@ const SignupPage = () => {
   }, [signupSuccess]);
 
   return (
-    <div className='signup'>
+    <>
       <Header/>
-      <h1>Sign Up</h1>
-      <div className='form'>
-        <form onSubmit={handleSignupSubmit}>
-          <label htmlFor='username'>Username </label>
-          <input 
-            type='text' 
-            id='username' 
-            value={username} 
-            required 
-            placeholder='Enter username' 
-            onChange={onUsernameChange}
-          />
-          <br/>
-          <label htmlFor='password'>Password </label>
-          <input 
-            type='password' 
-            id='password' 
-            value={password} 
-            required 
-            placeholder='Enter password' 
-            onChange={onPasswordChange}
-          />
-          <br/>
-          <label htmlFor='firstname'>First Name </label>
-          <input 
-            type='text' 
-            id='firstname' 
-            value={firstName} 
-            required 
-            placeholder='Enter your first name' 
-            onChange={onFirstNameChange}
-          />
-          <br/>
-          <label htmlFor='lastname'>Last Name </label>
-          <input 
-            type='text' 
-            id='lastname' 
-            value={lastName} 
-            placeholder='Enter your last name' 
-            onChange={onLastNameChange}
-          />
-          <br/>
-          <input type='submit' value='Sign Up'/>
-        </form>
+      <div className='signup'>
+        <h1>Sign Up</h1>
+        <div className='form'>
+          <form onSubmit={handleSignupSubmit}>
+            <label htmlFor='username'>Username </label>
+            <input 
+              type='text' 
+              id='username' 
+              value={username} 
+              required 
+              placeholder='Enter username' 
+              onChange={onUsernameChange}
+            />
+            <br/>
+            <label htmlFor='password'>Password </label>
+            <input 
+              type='password' 
+              id='password' 
+              value={password} 
+              required 
+              placeholder='Enter password' 
+              onChange={onPasswordChange}
+            />
+            <br/>
+            <label htmlFor='firstname'>First Name </label>
+            <input 
+              type='text' 
+              id='firstname' 
+              value={firstName} 
+              required 
+              placeholder='Enter your first name' 
+              onChange={onFirstNameChange}
+            />
+            <br/>
+            <label htmlFor='lastname'>Last Name </label>
+            <input 
+              type='text' 
+              id='lastname' 
+              value={lastName} 
+              placeholder='Enter your last name' 
+              onChange={onLastNameChange}
+            />
+            <br/>
+            <input type='submit' value='Sign Up'/>
+          </form>
+        </div>
+        <br/>
+        <span>or</span>
+        <br/>
+        <button onClick={() => { navigate('/login') }}>Log In</button>
+        <br/>
+        <span className="error-text">{errorText}</span>
       </div>
-      <p>or</p>
-      <button onClick={() => { navigate('/login') }}>Log In</button>
-      <span>{errorText}</span>
-    </div>
+    </>
   );
 };
 

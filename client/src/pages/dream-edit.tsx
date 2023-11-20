@@ -103,39 +103,41 @@ const EditDreamPage = () => {
   }, [editDreamSuccess]);
 
   return (
-    <div className="dream-edit">
+    <>
       <Header/>
-      <h1>Edit Dream</h1>
-      <div className="form">
-        <form onSubmit={handleEditDreamSubmit}>
-          <label htmlFor="title">Dream Title </label>
-          <input 
-            type="text" 
-            id="title" 
-            value={title} 
-            placeholder="Enter dream title" 
-            required 
-            onChange={onTitleChange}
-          />
-          <br/>
+      <div className="dream-edit">
+        <h1>Edit Dream</h1>
+        <div className="form">
+          <form onSubmit={handleEditDreamSubmit}>
+            <label htmlFor="title">Dream Title </label>
+            <input 
+              type="text" 
+              id="title" 
+              value={title} 
+              placeholder="Enter dream title" 
+              required 
+              onChange={onTitleChange}
+            />
+            <br/>
 
-          <label htmlFor="content">Dream Content </label><br/>
-          <textarea 
-            id="content" 
-            value={content} 
-            placeholder="Enter dream content" 
-            rows={5}
-            cols={50}
-            required 
-            onChange={onContentChange}
-          />
-          <br/>
+            <label htmlFor="content">Dream Content </label><br/>
+            <textarea 
+              id="content" 
+              value={content} 
+              placeholder="Enter dream content" 
+              rows={5}
+              cols={50}
+              required 
+              onChange={onContentChange}
+            />
+            <br/>
 
-          <input type="submit" value="Edit Dream"/>
-        </form>
+            <input type="submit" value="Edit Dream"/>
+          </form>
+        </div>
+        <span className="error-text">{errorText}</span>
       </div>
-      <span>{errorText}</span>
-    </div>
+    </>
   );
 };
 

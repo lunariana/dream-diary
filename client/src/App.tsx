@@ -10,6 +10,7 @@ import DreamPage from "./pages/dream";
 import NewDreamPage from "./pages/dream-new";
 import EditDreamPage from "./pages/dream-edit";
 import PageNotFound from "./pages/404";
+import "./App.css";
 
 const App = () => {
   return (

@@ -79,18 +79,20 @@ const DreamPage = () => {
   };
 
   return (
-    <div className="dream">
+    <>
       <Header/>
-      {/* ////////////////////////////////////////////////////////////// maybe add a back button or left right buttons */}
-      <h1>{dream.title}</h1>
-      <p>{dream.dateCreated ? "Created on: " + dream.dateCreated : ""}</p>
-      <p>{dream.dateEdited ? "Edited on: " + dream.dateEdited : ""}</p>
-      <p>{dream.content}</p>
-      <button onClick={onEditClick}>Edit</button>
-      <button onClick={onDeleteClick}>Delete</button>
-      {/* ///////////////////////////////////////////////////////////// add buttons to edit/delete dream */}
-      <p>{errorText}</p>
-    </div>
+      <div className="dream">
+        {/* ////////////////////////////////////////////////////////////// maybe add a back button or left right buttons */}
+        <h1>{dream.title}</h1>
+        <p>{dream.dateCreated ? "Created on: " + dream.dateCreated : ""}</p>
+        <p>{dream.dateEdited ? "Edited on: " + dream.dateEdited : ""}</p>
+        <p>{dream.content}</p>
+        <button onClick={onEditClick}>Edit</button>
+        <button onClick={onDeleteClick}>Delete</button>
+        {/* ///////////////////////////////////////////////////////////// add buttons to edit/delete dream */}
+        <p className="error-text">{errorText}</p>
+      </div>
+    </>
   );
 };
 

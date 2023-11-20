@@ -1,0 +1,24 @@
+.header {
+  width: 100%;
+  /* margin-top: 0px; */
+  background-color: rgba(0, 0, 0, 0.20);
+  padding: 5px;
+  overflow: auto;    /* need this to maintain proper header height */
+}
+
+/* ////////////////////////////////////////////////////////// fix alignment issue!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+.link {
+  margin-top: 20px;
+  padding-top: 20px;
+  padding-right: 30px;
+}
+
+.left {
+  float: left;
+  margin-left: 20px;
+}
+
+.right {
+  float: right;
+  margin-right: 20px;
+}

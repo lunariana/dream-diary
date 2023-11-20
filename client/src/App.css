@@ -1,18 +1,82 @@
+* {
+  font-family: 'Courier New', Courier, monospace;
+  color: ivory;
+}
+
+body {
+  margin: 0px;
+  overflow: overlay;
+  background-image: url(../public/img/night-sky.jpeg);
+  background-color: darkslateblue;
+  background-repeat: no-repeat;
+  background-size: 101%;
+  background-position: center;
+  background-attachment: fixed;
+}
+
 .App {
   text-align: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* there has to be a better way to do this */
+div.default, div.home, div.about, div.login, div.signup, div.dream-archive, div.dream, div.new-dream, div.edit-dream, div.page-not-found {
+  margin: auto;    /* centers div element */
+  max-width: 50%;
 }
 
-.App-link {
-  color: #61dafb;
+button, input[type=submit] {
+  background-color: rgba(0, 0, 0, 0.25);
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+button:hover, input[type=submit]:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: all 0.4s ease;
+}
+
+input[type=text], textarea, input[type=password] {
+  background-color: rgba(0, 0, 0, 0.25);
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 10px;
+}
+
+::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.error-text {
+  color: deeppink;
+}
+
+/* scrollbar */
+/* ////////////////////////////////////////////////////// consider removing the scrollbar altogether */
+/* width */
+::-webkit-scrollbar {
+  width: 18px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: solid transparent;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  width: 10px;
+  border: 4px solid transparent;
+  border-radius: 10px;
+  background-clip: content-box;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+  width: 10px;
+  border: 4px solid transparent;
+  border-radius: 10px;
+  background-clip: content-box;
 }

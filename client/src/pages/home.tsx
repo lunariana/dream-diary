@@ -41,8 +41,8 @@ const HomePage = () => {
 
   return (
     <>
+      <Header/>
       <div className="home">
-        <Header/>
         <h1>Dream Diary</h1>
         <p>hello [name]!</p>  {/* ////////////////////////// todo: get user's name in here */}
         <p>welcome to your dream diary!</p>

@@ -39,13 +39,15 @@ const DefaultPage = () => {
 
   return (
     <>
+      <Header/>
       <div className="default">
-        <Header/>
         <h1>Dream Diary</h1>
         <p>hello!</p>
         <p>please log in or sign up to access your dream diary</p>
         <button onClick={() => { navigate('/login') }}>Log In</button>
-        <p>or</p>
+        <br/>
+        <span>or</span>
+        <br/>
         <button onClick={() => { navigate('/signup') }}>Sign Up</button>
         <p>sweet dreams!</p>
         <br/>
@@ -54,6 +56,27 @@ const DefaultPage = () => {
         <p>add short intro text body</p>
         <p>if time permits, create an user/account settings page</p>
         <p>also: change favicon and page name thingy</p>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
       </div>
     </>
   );

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
+import './css/header.css';
 
 const Header = () => {
 
@@ -72,20 +73,18 @@ const Header = () => {
 
   return (
     <div className='header'>
-      <nav>
-        <button onClick={onBackClick}>back </button> {/* just to remember that this is possible */}
-        <Link to="/">Home </Link>
-        <Link to="/about">About </Link>
-        {/* ///////////////////////////////////////////////// temporary links? */}
-        <Link to='/dream-archive'>Dream Archive </Link>
-        <Link to='/new-dream'>New Dream </Link>
-        {authStatus ? (
-          <button onClick={handleLogoutClick}>Log Out</button>
-        ) : (
-          <button onClick={handleLoginClick}>Log In</button>
-        )}
-      </nav>
-      <span>{errorText}</span>
+      <button className="left" onClick={onBackClick}>back </button> {/* just to remember that this is possible */}
+      <Link className='link' to="/">Home</Link>
+      {/* ///////////////////////////////////////////////// temporary links? */}
+      <Link className='link' to='/dream-archive'>Dream Archive</Link>
+      <Link className='link' to='/new-dream'>New Dream</Link>
+      <Link className='link' to="/about">About</Link>
+      {authStatus ? (
+        <button className="right" onClick={handleLogoutClick}>Log Out</button>
+      ) : (
+        <button className="right" onClick={handleLoginClick}>Log In</button>
+      )}
+      <span className="error-text">{errorText}</span>
     </div>
   );
 };

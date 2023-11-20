@@ -55,21 +55,23 @@ const DreamArchivePage = () => {
   };
 
   return (
-    <div className='dream-archive'>
+    <>
       <Header/>
-      {/* //////////////////////////////////////////////////////////////////////// add link to new dream page */}
-      <h1>My Dream Archive</h1>
-      <div className="dreams">
-        {dreams.map((dream) => (
-          <div className="dream-item" key={dream.dreamID} onClick={() => onDreamItemClick(dream.dreamID)}>
-            <h3>{dream.title}</h3>
-            <p>{dream.dateCreated.slice(0, 10)} {dream.dateEdited ? "(" + dream.dateEdited?.slice(0, 10) + ")" : ""}</p>
-            <p>{dream.content.slice(0, 40)}</p>    {/* show only the first 40 characters */}
-          </div>
-        ))}
+      <div className='dream-archive'>
+        {/* //////////////////////////////////////////////////////////////////////// add link to new dream page */}
+        <h1>My Dream Archive</h1>
+        <div className="dreams">
+          {dreams.map((dream) => (
+            <div className="dream-item" key={dream.dreamID} onClick={() => onDreamItemClick(dream.dreamID)}>
+              <h3>{dream.title}</h3>
+              <p>{dream.dateCreated.slice(0, 10)} {dream.dateEdited ? "(" + dream.dateEdited?.slice(0, 10) + ")" : ""}</p>
+              <p>{dream.content.slice(0, 40)}</p>    {/* show only the first 40 characters */}
+            </div>
+          ))}
+        </div>
+        <span className="error-text">{errorText}</span>
       </div>
-      <span>{errorText}</span>
-    </div>
+    </>
   );
 };
 

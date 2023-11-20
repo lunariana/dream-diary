@@ -71,38 +71,43 @@ const LoginPage = () => {
   }, [loginSuccess]);
 
   return (
-    <div className='login'>
+    <>
       <Header/>
-      <h1>Login</h1>
-      <div className='form'>
-        <form onSubmit={handleLoginSubmit}>
-          <label htmlFor='username'>Username </label>
-          <input 
-            type='text' 
-            id='username' 
-            value={username} 
-            required 
-            placeholder='Enter username' 
-            onChange={onUsernameChange}
-          />
-          <br/>
-          <label htmlFor='password'>Password </label>
-          <input 
-            type='password' 
-            id='password' 
-            value={password} 
-            required 
-            placeholder='Enter password' 
-            onChange={onPasswordChange}
-          />
-          <br/>
-          <input type='submit' value='Log In'/>
-        </form>
+      <div className='login'>
+        <h1>Login</h1>
+        <div className='form'>
+          <form onSubmit={handleLoginSubmit}>
+            <label htmlFor='username'>Username </label>
+            <input 
+              type='text' 
+              id='username' 
+              value={username} 
+              required 
+              placeholder='Enter username' 
+              onChange={onUsernameChange}
+            />
+            <br/>
+            <label htmlFor='password'>Password </label>
+            <input 
+              type='password' 
+              id='password' 
+              value={password} 
+              required 
+              placeholder='Enter password' 
+              onChange={onPasswordChange}
+            />
+            <br/>
+            <input type='submit' value='Log In'/>
+          </form>
+        </div>
+        <br/>
+        <span>or</span>
+        <br/>
+        <button onClick={() => { navigate('/signup') }}>Sign Up</button>
+        <br/>
+        <span className="error-text">{errorText}</span>
       </div>
-      <p>or</p>
-      <button onClick={() => { navigate('/signup') }}>Sign Up</button>
-      <span>{errorText}</span>
-    </div>
+    </>
   );
 };
 
