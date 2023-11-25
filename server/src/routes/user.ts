@@ -16,8 +16,6 @@ router.post('/signup', async (req: Request, res: Response) => {
     console.log("user signup:", req.body);
     const { username, password, firstName, lastName } = req.body;
 
-    /////////////////////////////////////////////////////////////////////////////// should check length of username, password, first & last name  -- maybe do this in client?
-
     // check that the username is unique
     const usernameExists = await prisma.users.findUnique({
         where: {
@@ -25,7 +23,7 @@ router.post('/signup', async (req: Request, res: Response) => {
         },
     });
     if (usernameExists) {
-        return res.status(500).json({ error: "Username is already taken" });
+        return res.status(500).json({ error: "sorry, this username is already taken :(" });
     }
 
     // add new user to database
@@ -66,8 +64,6 @@ router.post('/login', async (req: Request, res: Response) => {
     console.log("user login:", req.body);
     const { username, password } = req.body;
 
-    ////////////////////////////////////////////////////////////////////////////////// should check length of username and password -- maybe in client
-
     const user = await prisma.users.findUnique({
         where: {
             username: username,
@@ -77,12 +73,12 @@ router.post('/login', async (req: Request, res: Response) => {
 
     // check whether username exists in database
     if (user === null) {
-        return res.status(500).json({ error: "User does not exist" });
+        return res.status(500).json({ error: "looks like you don't have a dream diary yet. sign up to get one!" });
     }
 
     // check whether username and password match
     if (password !== user.password) {
-        return res.status(500).json({ error: "Wrong password" });
+        return res.status(500).json({ error: "wrong password!" });
     }
 
     const userInfo = await prisma.users.findUnique({
@@ -126,7 +122,7 @@ router.post('/logout', async (req: Request, res: Response) => {
                 return res.status(500).json({ error: err });
             }
 
-            return res.status(200).json({ message: "Successfully logged out" });    // this needs to be inside the callback function b/c req.session.regenerate is asynchronous
+            return res.status(200).json({ message: "successfully logged out!" });    // this needs to be inside the callback function b/c req.session.regenerate is asynchronous
         });
     });
 });
@@ -141,8 +137,24 @@ router.post('/getAuthStatus', async (req: Request, res: Response) => {
     }
 });
 
-router.post('/getName', async (req: Request, res: Response) => {
+router.post('/getName', userAuthMiddleware, async (req: Request, res: Response) => {
 
+    // get user's name
+    console.log("user get name");
+    const username = req.session.username;
+    
+    const name = await prisma.users.findUnique({
+        select: {
+            firstName: true,
+            lastName: true,
+        },
+        where: {
+            username: username,
+        },
+    });
+    console.log(name);
+
+    return res.status(200).json(name);
 });
 
 router.post('/changeName', async (req: Request, res: Response) => {

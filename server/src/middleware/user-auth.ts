@@ -12,7 +12,7 @@ const userAuthMiddleware = async (req: Request, res: Response, next: NextFunctio
         next();
     } else {
         console.log("user authentication failed");
-        return res.status(500).json({ error: "Not logged in" });
+        return res.status(500).json({ error: "you're not logged in..." });
     }
 }
 

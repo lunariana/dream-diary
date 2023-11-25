@@ -15,6 +15,7 @@ const port = process.env.PORT || 8000;
 
 // only allow clients in whitelist to access server
 const whitelist = ['http://localhost:3000'];
+// const whitelist = ['https://lunaria.newbie.sparcsandbox.com'];
 const options: cors.CorsOptions = {
     origin: whitelist,
     credentials: true,            // must be enabled to allow axios to send cookies in requests

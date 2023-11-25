@@ -22,7 +22,7 @@ const LoginPage = () => {
   const onPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
 
-    ////////////////////////////////////////////////////////////// could add feature that informs user of password length requirements
+    ////////////////////////////////////////////////////////////// could add feature that informs user of password requirements
   };
 
   const handleLoginSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -33,6 +33,15 @@ const LoginPage = () => {
     // console.log(event.currentTarget.password.value);
     // console.log(username);
     // console.log(password);
+
+    // check if username and password meet requirements
+    if (!username) {
+      setErrorText("please enter a username");
+      return;
+    } else if (!password) {
+      setErrorText("please enter a password");
+      return;
+    }
 
     const loginAPIRequest = async() => {
 
@@ -58,7 +67,7 @@ const LoginPage = () => {
         setErrorText(error.response.data.error);
 
       } else {
-        setErrorText("Something went wrong...");
+        setErrorText("something went wrong...");
       }
     });
   };
@@ -74,38 +83,41 @@ const LoginPage = () => {
     <>
       <Header/>
       <div className='login'>
-        <h1>Login</h1>
+        <h1>login</h1>
         <div className='form'>
           <form onSubmit={handleLoginSubmit}>
-            <label htmlFor='username'>Username </label>
+            <label htmlFor='username'>username </label>
             <input 
               type='text' 
               id='username' 
               value={username} 
-              required 
-              placeholder='Enter username' 
+              // required 
+              placeholder='enter username' 
               onChange={onUsernameChange}
             />
+            <span className='error-text'>*</span>
             <br/>
-            <label htmlFor='password'>Password </label>
+            <label htmlFor='password'>password </label>
             <input 
               type='password' 
               id='password' 
               value={password} 
-              required 
-              placeholder='Enter password' 
+              // required 
+              placeholder='enter password' 
               onChange={onPasswordChange}
             />
+            <span className='error-text'>*</span>
             <br/>
-            <input type='submit' value='Log In'/>
+            <input type='submit' value='log in'/>
           </form>
         </div>
+        <span className="error-text">{errorText}</span>
+        <br/>
         <br/>
         <span>or</span>
         <br/>
-        <button onClick={() => { navigate('/signup') }}>Sign Up</button>
+        <button onClick={() => { navigate('/signup') }}>sign up</button>
         <br/>
-        <span className="error-text">{errorText}</span>
       </div>
     </>
   );

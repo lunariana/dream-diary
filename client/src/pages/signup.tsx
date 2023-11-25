@@ -44,6 +44,24 @@ const SignupPage = () => {
     // console.log(username);
     // console.log(password);
 
+    // check if input values meet requirements
+    if (!username) {
+      setErrorText("please enter a username");
+      return;
+    } else if (!password) {
+      setErrorText("please enter a password");
+      return;
+    } else if (username.length < 3 || username.length > 20) {
+      setErrorText("your username must be 3 to 20 characters long");
+      return;
+    } else if (password.length < 8 || password.length > 20) {
+      setErrorText("your password must be 8 to 20 characters long");
+      return;
+    } else if (!firstName) {
+      setErrorText("please enter your first name");
+      return;
+    }
+
     const signupAPIRequest = async() => {
 
       // basically defines the types of data that a UserInfo object has; not necessary but ig it helps with type clarity
@@ -68,7 +86,7 @@ const SignupPage = () => {
         setErrorText(error.response.data.error);
 
       } else {
-        setErrorText("Something went wrong...");
+        setErrorText("something went wrong...");
       }
     });
   };
@@ -84,57 +102,61 @@ const SignupPage = () => {
     <>
       <Header/>
       <div className='signup'>
-        <h1>Sign Up</h1>
+        <h1>sign up</h1>
         <div className='form'>
           <form onSubmit={handleSignupSubmit}>
-            <label htmlFor='username'>Username </label>
+            <label htmlFor='username'>username </label>
             <input 
               type='text' 
               id='username' 
               value={username} 
-              required 
-              placeholder='Enter username' 
+              // required 
+              placeholder='enter username' 
               onChange={onUsernameChange}
             />
+            <span className='error-text'>*</span>
             <br/>
-            <label htmlFor='password'>Password </label>
+            <label htmlFor='password'>password </label>
             <input 
               type='password' 
               id='password' 
               value={password} 
-              required 
-              placeholder='Enter password' 
+              // required 
+              placeholder='enter password' 
               onChange={onPasswordChange}
             />
+            <span className='error-text'>*</span>
             <br/>
-            <label htmlFor='firstname'>First Name </label>
+            <label htmlFor='firstname'>first name </label>
             <input 
               type='text' 
               id='firstname' 
               value={firstName} 
-              required 
-              placeholder='Enter your first name' 
+              // required 
+              placeholder='enter your first name' 
               onChange={onFirstNameChange}
             />
+            <span className='error-text'>*</span>
             <br/>
-            <label htmlFor='lastname'>Last Name </label>
+            <label htmlFor='lastname'>last name </label>
             <input 
               type='text' 
               id='lastname' 
               value={lastName} 
-              placeholder='Enter your last name' 
+              placeholder='enter your last name' 
               onChange={onLastNameChange}
             />
             <br/>
-            <input type='submit' value='Sign Up'/>
+            <input type='submit' value='sign up'/>
           </form>
         </div>
+        <span className="error-text">{errorText}</span>
+        <br/>
         <br/>
         <span>or</span>
         <br/>
-        <button onClick={() => { navigate('/login') }}>Log In</button>
+        <button onClick={() => { navigate('/login') }}>log in</button>
         <br/>
-        <span className="error-text">{errorText}</span>
       </div>
     </>
   );

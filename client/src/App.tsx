@@ -9,6 +9,7 @@ import DreamArchivePage from "./pages/dream-archive";
 import DreamPage from "./pages/dream";
 import NewDreamPage from "./pages/dream-new";
 import EditDreamPage from "./pages/dream-edit";
+import ConfirmDeletePage from "./pages/confirm-delete";
 import PageNotFound from "./pages/404";
 import "./App.css";
 
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="dream/:dreamID" element={ <DreamPage/> }/>
           <Route path="new-dream" element={ <NewDreamPage/> }/>
           <Route path="edit-dream/:dreamID" element={ <EditDreamPage/> }/>
+          <Route path="confirm-delete/:dreamID" element={ <ConfirmDeletePage/> }/>
           <Route path="*" element={ <PageNotFound/> }/>
         </Routes>
       </BrowserRouter>

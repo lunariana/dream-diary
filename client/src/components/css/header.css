@@ -1,16 +1,33 @@
 .header {
   width: 100%;
-  /* margin-top: 0px; */
   background-color: rgba(0, 0, 0, 0.20);
-  padding: 5px;
   overflow: auto;    /* need this to maintain proper header height */
+  padding: 5px 0px;
 }
 
-/* ////////////////////////////////////////////////////////// fix alignment issue!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
-.link {
-  margin-top: 20px;
-  padding-top: 20px;
-  padding-right: 30px;
+button.menu {
+  background-color: transparent;
+  font-size: medium;
+  text-decoration: underline /* overline */;
+  text-underline-offset: 3px;
+  text-decoration-style: dotted;
+  /* text-decoration-thickness: 1px; */
+  padding: 13px;
+}
+
+button.menu:hover {
+  background-color: rgba(0, 0, 0, 0);
+  /* more powder bluey */
+  color: rgb(169, 236, 243);
+  /* more turquoisey */
+  /* color: rgb(123, 247, 239); */
+  /* color:teal; */
+  text-shadow: 
+    0 0 5px rgb(0, 119, 255),
+    0 0 10px rgb(0, 107, 139),
+    0 0 20px rgb(0, 107, 139),
+    0 0 30px blue;
+  transition-duration: 0.2s;
 }
 
 .left {

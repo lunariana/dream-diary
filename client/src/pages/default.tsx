@@ -32,7 +32,7 @@ const DefaultPage = () => {
         console.log(error.response.data);
         setErrorText(error.response.data.error);
       } else {
-        setErrorText("Something went wrong...");
+        setErrorText("something went wrong...");
       }
     });
   }, []);
@@ -41,42 +41,19 @@ const DefaultPage = () => {
     <>
       <Header/>
       <div className="default">
-        <h1>Dream Diary</h1>
-        <p>hello!</p>
+        <h1>dream diary</h1>
+        <p>hello there!</p>
         <p>please log in or sign up to access your dream diary</p>
-        <button onClick={() => { navigate('/login') }}>Log In</button>
+        <button onClick={() => { navigate('/login') }}>log in</button>
         <br/>
         <span>or</span>
         <br/>
-        <button onClick={() => { navigate('/signup') }}>Sign Up</button>
+        <button onClick={() => { navigate('/signup') }}>sign up</button>
         <p>sweet dreams!</p>
         <br/>
         <br/>
         <br/>
-        <p>add short intro text body</p>
-        <p>if time permits, create an user/account settings page</p>
-        <p>also: change favicon and page name thingy</p>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
+        <p className="error-text">{errorText}</p>
       </div>
     </>
   );

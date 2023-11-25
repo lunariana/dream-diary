@@ -8,6 +8,7 @@ const HomePage = () => {
 
   // const [authStatus, setAuthStatus] = React.useState<boolean>(false);
   const [errorText, setErrorText] = React.useState<string>("");
+  const [firstName, setFirstName] = React.useState<string>("");
 
   const navigate = useNavigate();
 
@@ -34,28 +35,50 @@ const HomePage = () => {
         setErrorText(error.response.data.error);
 
       } else {
-        setErrorText("Something went wrong...");
+        setErrorText("something went wrong...");
       }
     });
+
+    const getUserNameAPIRequest = async () => {
+
+      interface Name {
+        firstName: string;
+        lastName: string;
+      };
+      
+      const { data } = await axios.post<Name>('/user/getName');
+      console.log(data);
+
+      setFirstName(data.firstName);
+    };
+
+    getUserNameAPIRequest().catch((error) => {
+      // if the server sends error information
+      if (error.response) {
+        console.log(error.response.data);
+        setErrorText(error.response.data.error);
+
+      } else {
+        setErrorText("something went wrong...");
+      }
+    });
+
   }, []);
 
   return (
     <>
       <Header/>
       <div className="home">
-        <h1>Dream Diary</h1>
-        <p>hello [name]!</p>  {/* ////////////////////////// todo: get user's name in here */}
-        <p>welcome to your dream diary!</p>
-        <button onClick={() => { navigate('/new-dream') }}>Record a New Dream</button>
+        <h1>dream diary</h1>
+        <p>hello, {firstName}!</p>  {/* ////////////////////////// todo: get user's name in here */}
+        <p>welcome back to your dream diary :)</p>
+        <button onClick={() => { navigate('/new-dream') }}>record a new dream</button>
         <br/>
-        <button onClick={() => { navigate('/dream-archive') }}>View Past Dreams</button>
+        <button onClick={() => { navigate('/dream-archive') }}>revisit past dreams</button>
         <p>sweet dreams!</p>
         <br/>
         <br/>
-        <p>say hello name (and/or say name's dream diary)</p>
-        <p>add short intro text body</p>
-        <p>if time permits, create an user/account settings page</p>
-        <p>also: change favicon and page name thingy</p>
+        <p className="error-text">{errorText}</p>
       </div>
     </>
   );

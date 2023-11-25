@@ -11,8 +11,8 @@ model Dreams {
   dreamID     Int       @id
   title       String    @db.VarChar(255)
   content     String    @db.Text
-  dateCreated DateTime? @db.Date
-  dateEdited  DateTime? @db.Date
+  dateCreated DateTime? @db.DateTime(0)
+  dateEdited  DateTime? @db.DateTime(0)
   username    String    @db.VarChar(20)
   Users       Users     @relation(fields: [username], references: [username], onUpdate: Restrict, map: "Dreams_ibfk_1")
 

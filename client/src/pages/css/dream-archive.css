@@ -1,0 +1,28 @@
+.dream-item {
+  background-color: rgba(0, 0, 0, 0.25);
+  border-radius: 25px;
+  padding: 10px 30px;
+  margin: 20px 0px;
+}
+
+.dream-item:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition-duration: 0.3s;
+}
+
+.dream-item:hover * {
+  /* color: powderblue; */
+  color: rgb(251, 201, 251);
+  text-shadow: 
+    0 0 5px darkviolet,
+    0 0 10px darkviolet,
+    0 0 20px darkviolet,
+    0 0 30px darkviolet;
+  transition-duration: 0.3s;
+}
+
+.dream-item:hover .metadata {
+  /* color: rgba(150, 232, 239, 0.6); */
+  color: rgb(245, 213, 245, 0.6);
+}

@@ -10,8 +10,36 @@ const NewDreamPage = () => {
   const [content, setContent] = React.useState<string>("");
   const [errorText, setErrorText] = React.useState<string>("");
   const [newDreamSuccess, setNewDreamSuccess] = React.useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState<boolean>(false);
 
   const navigate = useNavigate();
+
+  // make api call once (twice in dev mode) when page first renders
+  React.useEffect(() => {
+
+    // check if user is logged in
+    const getAuthStatusAPIRequest = async () => {
+
+      const { data } = await axios.post<boolean>('/user/getAuthStatus');
+      console.log(data, typeof(data));
+
+      setIsLoggedIn(data);
+      if (!data) {
+        setErrorText("please log in to record your dreams :)");
+      }
+    };
+
+    // if an error occurs, show error message
+    getAuthStatusAPIRequest().catch((error) => {
+      // if the server sends error information
+      if (error.response) {
+        console.log(error.response.data);
+        setErrorText(error.response.data.error);
+      } else {
+        setErrorText("something went wrong...");
+      }
+    });
+  }, []);
 
   const onTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
@@ -29,6 +57,14 @@ const NewDreamPage = () => {
     // console.log(event.currentTarget.content);
     console.log(title);
     console.log(content);
+
+    if (!title) {
+      setErrorText("you forgot the title...");
+      return;
+    } else if (!content) {
+      setErrorText("aren't you going to describe your dream?");
+      return;
+    }
     
     const newDreamAPIRequest = async () => {
 
@@ -63,7 +99,7 @@ const NewDreamPage = () => {
         setErrorText(error.response.data.error);
 
       } else {
-        setErrorText("Something went wrong...");
+        setErrorText("something went wrong...");
       }
     });
   };
@@ -80,36 +116,42 @@ const NewDreamPage = () => {
     <>
       <Header/>
       <div className="dream-new">
-        <h1>New Dream</h1>
-        <div className="form">
-          <form onSubmit={handleNewDreamSubmit}>
-            <label htmlFor="title">Dream Title </label>
-            <input 
-              type="text" 
-              id="title" 
-              value={title} 
-              placeholder="Enter dream title" 
-              required 
-              onChange={onTitleChange}
-            />
-            <br/>
+        <h1>new dream</h1>
+        {isLoggedIn ? (
+          <div className="form">
+            <form onSubmit={handleNewDreamSubmit}>
+              <label htmlFor="title">dream title </label>
+              <br/>
+              <input 
+                type="text" 
+                id="title" 
+                value={title} 
+                placeholder="enter dream title" 
+                size={52}
+                // required 
+                onChange={onTitleChange}
+              />
+              <br/>
+              <br/>
 
-            <label htmlFor="content">Dream Content </label><br/>
-            <textarea 
-              id="content" 
-              value={content} 
-              placeholder="Enter dream content" 
-              rows={5}
-              cols={50}
-              required 
-              onChange={onContentChange}
-            />
-            <br/>
+              <label htmlFor="content">dream content </label>
+              <br/>
+              <textarea 
+                id="content" 
+                value={content} 
+                placeholder="enter dream content" 
+                rows={10}
+                cols={50}
+                // required 
+                onChange={onContentChange}
+              />
+              <br/>
 
-            <input type="submit" value="Add New Dream"/>
-          </form>
-        </div>
-        <span className="error-text">{errorText}</span>
+              <input type="submit" value="add new dream!"/>
+            </form>
+          </div>
+        ) : ( <></> )}
+        <p className="error-text">{errorText}</p>
       </div>
     </>
   );

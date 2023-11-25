@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import './css/header.css';
 
@@ -30,7 +30,7 @@ const Header = () => {
         setErrorText(error.response.data.error);
 
       } else {
-        setErrorText("Something went wrong...");
+        setErrorText("something went wrong...");
       }
     });
   }, []);
@@ -66,26 +66,27 @@ const Header = () => {
         setErrorText(error.response.data.error);
 
       } else {
-        setErrorText("Something went wrong...");
+        setErrorText("something went wrong...");
       }
     });
   };
 
   return (
-    <div className='header'>
-      <button className="left" onClick={onBackClick}>back </button> {/* just to remember that this is possible */}
-      <Link className='link' to="/">Home</Link>
-      {/* ///////////////////////////////////////////////// temporary links? */}
-      <Link className='link' to='/dream-archive'>Dream Archive</Link>
-      <Link className='link' to='/new-dream'>New Dream</Link>
-      <Link className='link' to="/about">About</Link>
-      {authStatus ? (
-        <button className="right" onClick={handleLogoutClick}>Log Out</button>
-      ) : (
-        <button className="right" onClick={handleLoginClick}>Log In</button>
-      )}
-      <span className="error-text">{errorText}</span>
-    </div>
+    <>
+      <div className='header'>
+        <button className="left" onClick={onBackClick}>back</button> {/* just to remember that this is possible */}
+        <button className='menu' onClick={ () => { navigate('/'); }} >home</button>
+        <button className='menu' onClick={ () => { navigate('/dream-archive'); } }>dream archive</button>
+        <button className='menu' onClick={ () => { navigate('/new-dream'); } }>new dream</button>
+        <button className='menu' onClick={ () => { navigate('/about'); } }>about</button>
+        {authStatus ? (
+          <button className="right" onClick={handleLogoutClick}>log out</button>
+        ) : (
+          <button className="right" onClick={handleLoginClick}>log in</button>
+        )}
+      </div>
+      <p className="error-text">{errorText}</p>
+    </>
   );
 };
 

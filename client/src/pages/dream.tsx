@@ -43,7 +43,7 @@ const DreamPage = () => {
         setErrorText(error.response.data.error);
 
       } else {
-        setErrorText("Something went wrong...");
+        setErrorText("something went wrong...");
       }
     });
 
@@ -55,27 +55,8 @@ const DreamPage = () => {
   };
 
   const onDeleteClick = () => {
-
-    // delete dream from database
-    const deleteDreamAPIRequest = async () => {
-      const { data } = await axios.post<Dream>('/dream/' + dreamID + '/deleteDream');
-      console.log(data);
-
-      // navigate back to dream archive page
-      navigate('/dream-archive', { replace: true });
-    };
-
-    // if an error occurs, show error message
-    deleteDreamAPIRequest().catch((error) => {
-      // if the server sends error information
-      if (error.response) {
-        console.log(error.response.data);
-        setErrorText(error.response.data.error);
-
-      } else {
-        setErrorText("Something went wrong...");
-      }
-    });
+    // navigate to deletion confirmation page
+    navigate('/confirm-delete/' + dreamID);
   };
 
   return (
@@ -84,12 +65,16 @@ const DreamPage = () => {
       <div className="dream">
         {/* ////////////////////////////////////////////////////////////// maybe add a back button or left right buttons */}
         <h1>{dream.title}</h1>
-        <p>{dream.dateCreated ? "Created on: " + dream.dateCreated : ""}</p>
-        <p>{dream.dateEdited ? "Edited on: " + dream.dateEdited : ""}</p>
+        <p className="metadata">{dream.dateCreated ? "created on " + new Date(dream.dateCreated).toDateString() + " at " + new Date(dream.dateCreated).toLocaleTimeString() : ""}</p>
+        <p className="metadata">{dream.dateEdited ? "edited on " + new Date(dream.dateCreated).toDateString() + " at " + new Date(dream.dateEdited).toLocaleTimeString() : ""}</p>
         <p>{dream.content}</p>
-        <button onClick={onEditClick}>Edit</button>
-        <button onClick={onDeleteClick}>Delete</button>
-        {/* ///////////////////////////////////////////////////////////// add buttons to edit/delete dream */}
+        {/* /////////////////////////////////////////////// how do i hide buttons when there is an error?? */}
+        {!errorText ? (
+          <>
+            <button onClick={onEditClick}>edit</button>
+            <button onClick={onDeleteClick}>delete</button>
+          </>
+        ) : ( <></> )}
         <p className="error-text">{errorText}</p>
       </div>
     </>

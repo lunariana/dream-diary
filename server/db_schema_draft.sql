@@ -17,16 +17,16 @@ DROP TABLE IF EXISTS Dreams;
 CREATE TABLE Dreams (
     dreamID int(11) PRIMARY KEY,
     title varchar(255) NOT NULL,
-    body text NOT NULL,
-    dateCreated DATE DEFAULT NULL,
-    dateEdited DATE DEFAULT NULL,
+    content text NOT NULL,
+    dateCreated DATETIME DEFAULT NULL,
+    dateEdited DATETIME DEFAULT NULL,
     username varchar(20) NOT NULL,
     FOREIGN KEY (username) REFERENCES Users(username)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES Dreams WRITE;
 ALTER TABLE Dreams DISABLE KEYS;
-INSERT INTO Dreams (dreamID, title, body, dateCreated, dateEdited, username)
+INSERT INTO Dreams (dreamID, title, content, dateCreated, dateEdited, username)
     VALUES (1, 'title', 'blablablah', CURDATE(), NULL, 'lunaria');
 ALTER TABLE Dreams ENABLE KEYS;
 UNLOCK TABLES;

@@ -1,57 +1,157 @@
 * {
   font-family: 'Courier New', Courier, monospace;
+  /* font-family: 'Red Hat Mono'; */
+  /* font-family: 'Anonymous Pro'; */
+  /* font-family: 'Cutive Mono', monospace; */
+  /* font-family: 'Mali'; */
+  font-family: 'Josefin Slab';
+  /* font-size: medium; */
   color: ivory;
+  line-height: 1.3;
+  overflow-wrap: break-word;  /* break excessively long words */
 }
 
 body {
   margin: 0px;
   overflow: overlay;
-  background-image: url(../public/img/night-sky.jpeg);
-  background-color: darkslateblue;
+  background-image: url(../public/img/night-sky-2-9.jpg);
+  background-color: rgb(31, 37, 113);
   background-repeat: no-repeat;
-  background-size: 101%;
+  background-size: cover;
   background-position: center;
   background-attachment: fixed;
 }
 
 .App {
   text-align: center;
+  white-space: pre-line;  /* ensure that text wraps where there is a line break */
 }
 
 /* there has to be a better way to do this */
-div.default, div.home, div.about, div.login, div.signup, div.dream-archive, div.dream, div.new-dream, div.edit-dream, div.page-not-found {
+div.default, 
+div.home, 
+div.about, 
+div.login, 
+div.signup, 
+div.dream-archive, 
+div.dream, 
+div.new-dream, 
+div.edit-dream, 
+div.confirm-delete,
+div.page-not-found {
   margin: auto;    /* centers div element */
-  max-width: 50%;
+  padding-bottom: 20px;
+  width: 50%;
+  max-width: 600px;
 }
 
-button, input[type=submit] {
-  background-color: rgba(0, 0, 0, 0.25);
-  border: none;
-  border-radius: 10px;
-  padding: 15px;
-  margin: 10px;
+h1 {
+  margin-top: 40px;
+  margin-bottom: 30px;
+  font-family: 'Dancing Script', 'Pacifico', 'Brush Script MT', 'Courier New';
+  /* font-family: 'Courier New', Courier, monospace; */
+  /* font-weight: normal; */
+  font-size: 56px;
+  /* text-shadow: 
+    0 0 5px darkviolet,
+    0 0 10px darkviolet,
+    0 0 20px darkviolet,
+    0 0 30px darkviolet; */
+}
+
+/* buttons */
+button, 
+input[type=submit] {
   cursor: pointer;
-}
-
-button:hover, input[type=submit]:hover {
-  background-color: rgba(0, 0, 0, 0.5);
-  transition: all 0.4s ease;
-}
-
-input[type=text], textarea, input[type=password] {
   background-color: rgba(0, 0, 0, 0.25);
   border: none;
   border-radius: 10px;
   padding: 15px;
   margin: 10px;
+}
+
+button:hover, 
+input[type=submit]:hover {
+  color: rgb(251, 201, 251);
+  /* color: ;; */
+  text-shadow: 
+    0 0 3px darkviolet,
+    0 0 5px darkviolet,
+    0 0 10px darkviolet,
+    0 0 20px darkviolet;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition-duration: 0.3s;
+}
+
+/* text input */
+input[type=text], 
+input[type=password], 
+textarea {
+  background-color: rgba(0, 0, 0, 0.25);
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 10px;
+}
+
+input[type=text]:focus, 
+input[type=password]:focus, 
+textarea:focus {
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  /* doesn't work properly w/ autofill */
+}
+
+input:-webkit-autofill, 
+input:-webkit-autofill:hover, 
+/* input:-webkit-autofill:focus,  */
+input:-webkit-autofill:active {
+  /* effectively block browser's autofill highlighting by using the longest transition duration possible lol */
+  transition: background-color 2147483647s;
+  -webkit-text-fill-color: peachpuff;
+  /* font-weight: bold; */
 }
 
 ::placeholder {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+::selection {
+  /* background-color: paleturquoise; */
+  background-color: rgba(175, 238, 238, 0.6);
 }
 
 .error-text {
-  color: deeppink;
+  color: white;
+  text-shadow: 
+    0 0 5px deeppink,
+    0 0 10px deeppink,
+    0 0 20px deeppink,
+    0 0 30px deeppink;
+  font-weight: bold;
+}
+
+.metadata {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: smaller;
+  font-style: italic;
+  margin: 5px;
+}
+
+.hint,
+.hint * {
+  font-style: italic;
+  font-size: small;
+  color: rgba(255, 255, 255, 0.66)
+}
+
+/* purple moon image */
+img.purple-moon {
+  width: 313px;
+  max-width: 100%;
+}
+
+img.purple-moon:hover {
+  cursor: pointer;
 }
 
 /* scrollbar */

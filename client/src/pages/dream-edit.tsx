@@ -13,6 +13,7 @@ const EditDreamPage = () => {
   const [content, setContent] = React.useState<string>("");
   const [errorText, setErrorText] = React.useState<string>("");
   const [editDreamSuccess, setEditDreamSuccess] = React.useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -28,6 +29,29 @@ const EditDreamPage = () => {
 
   // make api call once (twice in dev mode) when page first renders
   React.useEffect(() => {
+
+    // check if user is logged in
+    const getAuthStatusAPIRequest = async () => {
+
+      const { data } = await axios.post<boolean>('/user/getAuthStatus');
+      console.log(data, typeof(data));
+
+      setIsLoggedIn(data);
+      // if (!data) {
+      //   setErrorText("please log in to edit this dream");
+      // }
+    };
+
+    // if an error occurs, show error message
+    getAuthStatusAPIRequest().catch((error) => {
+      // if the server sends error information
+      if (error.response) {
+        console.log(error.response.data);
+        setErrorText(error.response.data.error);
+      } else {
+        setErrorText("something went wrong...");
+      }
+    });
 
     // get current dream data from server
     const getDreamAPIRequest = async () => {
@@ -48,7 +72,7 @@ const EditDreamPage = () => {
         setErrorText(error.response.data.error);
 
       } else {
-        setErrorText("Something went wrong...");
+        setErrorText("something went wrong...");
       }
     });
 
@@ -70,6 +94,14 @@ const EditDreamPage = () => {
     // console.log(event.currentTarget.content);
     console.log(title);
     console.log(content);
+
+    if (!title) {
+      setErrorText("you forgot the title...");
+      return;
+    } else if (!content) {
+      setErrorText("aren't you going to describe your dream?");
+      return;
+    }
     
     const editDreamAPIRequest = async () => {
 
@@ -89,7 +121,7 @@ const EditDreamPage = () => {
         setErrorText(error.response.data.error);
 
       } else {
-        setErrorText("Something went wrong...");
+        setErrorText("something went wrong...");
       }
     });
   };
@@ -106,36 +138,40 @@ const EditDreamPage = () => {
     <>
       <Header/>
       <div className="dream-edit">
-        <h1>Edit Dream</h1>
-        <div className="form">
-          <form onSubmit={handleEditDreamSubmit}>
-            <label htmlFor="title">Dream Title </label>
-            <input 
-              type="text" 
-              id="title" 
-              value={title} 
-              placeholder="Enter dream title" 
-              required 
-              onChange={onTitleChange}
-            />
-            <br/>
+        <h1>edit dream</h1>
+        {isLoggedIn ? (
+          <div className="form">
+            <form onSubmit={handleEditDreamSubmit}>
+              <label htmlFor="title">dream title </label>
+              <input 
+                type="text" 
+                id="title" 
+                value={title} 
+                placeholder="enter dream title" 
+                size={30}
+                // required 
+                onChange={onTitleChange}
+              />
+              <br/>
+              <br/>
 
-            <label htmlFor="content">Dream Content </label><br/>
-            <textarea 
-              id="content" 
-              value={content} 
-              placeholder="Enter dream content" 
-              rows={5}
-              cols={50}
-              required 
-              onChange={onContentChange}
-            />
-            <br/>
+              <label htmlFor="content">dream content </label><br/>
+              <textarea 
+                id="content" 
+                value={content} 
+                placeholder="enter dream content" 
+                rows={10}
+                cols={50}
+                // required 
+                onChange={onContentChange}
+              />
+              <br/>
 
-            <input type="submit" value="Edit Dream"/>
-          </form>
-        </div>
-        <span className="error-text">{errorText}</span>
+              <input type="submit" value="edit dream!"/>
+            </form>
+          </div>
+        ) : ( <></> )}
+        <p className="error-text">{errorText}</p>
       </div>
     </>
   );
