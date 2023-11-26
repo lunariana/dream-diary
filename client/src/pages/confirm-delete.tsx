@@ -51,9 +51,9 @@ const ConfirmDeletePage = () => {
       <Header/>
       <div className="confirm-delete">
         <h1>delete dream</h1>
-        <p>warning: this action can <strong>never ever</strong> be undone!</p>
+        <p>warning: this action can never <strong>ever</strong> be undone!</p>
         <p>once you do this, your dream will be gone <strong>forever</strong>!</p>
-        <p>if you want it back, you'll have to rack your brain and hope for the best cause the diary certainly won't remember it for you anymore!</p>
+        <p>if you want it back, you'll have to rack your brain and hope for the best :(( don't come crying back here cause the diary will <strong>not</strong> be able to help you anymore.</p>
         <p>think long and hard before you make this decision...</p>
         <br/>
         <p className="error-text">are you sure you want to delete this dream?</p>

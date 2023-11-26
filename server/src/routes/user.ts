@@ -73,7 +73,7 @@ router.post('/login', async (req: Request, res: Response) => {
 
     // check whether username exists in database
     if (user === null) {
-        return res.status(500).json({ error: "looks like you don't have a dream diary yet. sign up to get one!" });
+        return res.status(500).json({ error: "are you sure this is the right username?\n if you don't have a dream diary yet, sign up!" });
     }
 
     // check whether username and password match

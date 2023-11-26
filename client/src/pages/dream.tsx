@@ -2,6 +2,7 @@ import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Header from "../components/header";
 import axios from "axios";
+import './css/dream.css'
 
 // page showing an individual dream
 const DreamPage = () => {
@@ -68,7 +69,6 @@ const DreamPage = () => {
         <p className="metadata">{dream.dateCreated ? "created on " + new Date(dream.dateCreated).toDateString() + " at " + new Date(dream.dateCreated).toLocaleTimeString() : ""}</p>
         <p className="metadata">{dream.dateEdited ? "edited on " + new Date(dream.dateCreated).toDateString() + " at " + new Date(dream.dateEdited).toLocaleTimeString() : ""}</p>
         <p>{dream.content}</p>
-        {/* /////////////////////////////////////////////// how do i hide buttons when there is an error?? */}
         {!errorText ? (
           <>
             <button onClick={onEditClick}>edit</button>

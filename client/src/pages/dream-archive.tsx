@@ -89,7 +89,7 @@ const DreamArchivePage = () => {
             <>
               <p>the dream archive is currently empty...</p>
               <p>enjoy staring at this beautiful purple moon instead!</p>
-              <br/>
+              {/* <br/> */}
               <img className="purple-moon" src='../../img/purple-moon.png' alt="purple moon" onClick={ () => { navigate('/new-dream'); } } />
               <br/>
               <br/>
@@ -98,13 +98,21 @@ const DreamArchivePage = () => {
           ) : ( <></> )}
           {dreams.map((dream) => (
             <div className="dream-item" key={dream.dreamID} onClick={() => onDreamItemClick(dream.dreamID)}>
-              <h3>{dream.title}</h3>
+              <h3>{dream.title.length > 33 ? (dream.title.slice(0, 33) + "...") : (dream.title)}</h3>
               <p className="metadata">{new Date(dream.dateCreated).toLocaleDateString()} {dream.dateEdited ? "(" + new Date(dream.dateEdited).toLocaleDateString() + ")" : ""}</p>
               <p>{dream.content.length > 40 ? (dream.content.slice(0, 40) + "...") : (dream.content)}</p>    {/* show only the first 40 characters */}
             </div>
           ))}
         </div>
-        <p className="error-text">{errorText}</p>
+        {isLoggedIn ? (
+          <>
+            <p className="error-text">{errorText}</p>
+          </>
+        ) : (
+          <>
+            <p>{errorText}</p>
+          </>
+        )}
       </div>
     </>
   );

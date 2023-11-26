@@ -61,6 +61,9 @@ const NewDreamPage = () => {
     if (!title) {
       setErrorText("you forgot the title...");
       return;
+    } else if (title.length > 255) {
+      setErrorText("your title is wayyy too long!");
+      return;
     } else if (!content) {
       setErrorText("aren't you going to describe your dream?");
       return;
@@ -118,40 +121,45 @@ const NewDreamPage = () => {
       <div className="dream-new">
         <h1>new dream</h1>
         {isLoggedIn ? (
-          <div className="form">
-            <form onSubmit={handleNewDreamSubmit}>
-              <label htmlFor="title">dream title </label>
-              <br/>
-              <input 
-                type="text" 
-                id="title" 
-                value={title} 
-                placeholder="enter dream title" 
-                size={52}
-                // required 
-                onChange={onTitleChange}
-              />
-              <br/>
-              <br/>
+          <>
+            <div className="form">
+              <form onSubmit={handleNewDreamSubmit}>
+                <label htmlFor="title">dream title </label>
+                <br/>
+                <input 
+                  type="text" 
+                  id="title" 
+                  value={title} 
+                  placeholder="enter dream title" 
+                  size={52}
+                  // required 
+                  onChange={onTitleChange}
+                />
+                <br/>
+                <br/>
 
-              <label htmlFor="content">dream content </label>
-              <br/>
-              <textarea 
-                id="content" 
-                value={content} 
-                placeholder="enter dream content" 
-                rows={10}
-                cols={50}
-                // required 
-                onChange={onContentChange}
-              />
-              <br/>
+                <label htmlFor="content">dream content </label>
+                <br/>
+                <textarea 
+                  id="content" 
+                  value={content} 
+                  placeholder="enter dream content" 
+                  rows={10}
+                  cols={50}
+                  // required 
+                  onChange={onContentChange}
+                />
+                <br/>
 
-              <input type="submit" value="add new dream!"/>
-            </form>
-          </div>
-        ) : ( <></> )}
-        <p className="error-text">{errorText}</p>
+                <input type="submit" value="add new dream!"/>
+              </form>
+            </div>
+            <p className="error-text">{errorText}</p>
+          </>
+        ) : ( 
+          <>
+            <p>{errorText}</p>
+          </> )}
       </div>
     </>
   );

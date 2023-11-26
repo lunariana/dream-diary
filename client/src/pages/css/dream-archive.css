@@ -5,6 +5,22 @@
   margin: 20px 0px;
 }
 
+.dream-item h3 {
+  /* font-family: 'Red Hat Mono';
+  font-size: 100%;
+  margin-top: 20px; */
+  margin-bottom: 10px;
+}
+
+.dream-item p {
+  font-family: 'Red Hat Mono';
+  font-size: 80%;
+}
+
+.dream-item .metadata {
+  font-size: 70%;
+}
+
 .dream-item:hover {
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.5);
@@ -14,6 +30,7 @@
 .dream-item:hover * {
   /* color: powderblue; */
   color: rgb(251, 201, 251);
+  font-weight: bolder;
   text-shadow: 
     0 0 5px darkviolet,
     0 0 10px darkviolet,

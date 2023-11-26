@@ -143,19 +143,21 @@ const EditDreamPage = () => {
           <div className="form">
             <form onSubmit={handleEditDreamSubmit}>
               <label htmlFor="title">dream title </label>
+              <br/>
               <input 
                 type="text" 
                 id="title" 
                 value={title} 
                 placeholder="enter dream title" 
-                size={30}
+                size={52}
                 // required 
                 onChange={onTitleChange}
               />
               <br/>
               <br/>
 
-              <label htmlFor="content">dream content </label><br/>
+              <label htmlFor="content">dream content </label>
+              <br/>
               <textarea 
                 id="content" 
                 value={content} 

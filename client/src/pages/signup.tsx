@@ -146,6 +146,7 @@ const SignupPage = () => {
               placeholder='enter your last name' 
               onChange={onLastNameChange}
             />
+            <span className='invisible'>*</span>
             <br/>
             <input type='submit' value='sign up'/>
           </form>

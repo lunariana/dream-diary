@@ -7,12 +7,12 @@
 
 button.menu {
   background-color: transparent;
-  font-size: medium;
+  font-size: 91%;
   text-decoration: underline /* overline */;
   text-underline-offset: 3px;
   text-decoration-style: dotted;
   /* text-decoration-thickness: 1px; */
-  padding: 13px;
+  padding: 13px 15px;
 }
 
 button.menu:hover {
@@ -30,12 +30,12 @@ button.menu:hover {
   transition-duration: 0.2s;
 }
 
-.left {
+.header .left {
   float: left;
   margin-left: 20px;
 }
 
-.right {
+.header .right {
   float: right;
   margin-right: 20px;
 }

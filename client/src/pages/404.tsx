@@ -13,8 +13,8 @@ const PageNotFound = () => {
         {/* ///////////////////////////////////////// INSERT SOME IMAGE HEREEEEEEEEE */}
         {/* <br/> */}
         <h1>huh?</h1>
-        <p className="error-text">is this a dream? looks like this page doesn't exist...</p>
-        <br/>
+        <p>is this a dream? looks like this page doesn't exist...</p>
+        {/* <br/> */}
         <img className="purple-moon" src='../../img/purple-moon.png' alt="purple moon" onClick={ () => { navigate(-1); } } />
         <br/>
         <br/>
