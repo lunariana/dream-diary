@@ -98,6 +98,9 @@ const EditDreamPage = () => {
     if (!title) {
       setErrorText("you forgot the title...");
       return;
+    } else if (title.length > 255) {
+      setErrorText("your title is wayyy too long!");
+      return;
     } else if (!content) {
       setErrorText("aren't you going to describe your dream?");
       return;
